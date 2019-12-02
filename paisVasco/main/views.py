@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 path = 'data'
 
 
-
 def populateDatabase(request):
     e = populateTipoEventos()
     l = populateLenguas()
