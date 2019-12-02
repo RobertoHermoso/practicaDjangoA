@@ -5,17 +5,18 @@ from django.conf import settings
 from datetime import datetime
 
 
-from main.forms import  EventoBuscarFechaForm, EventoBuscarLenguaForm
+from main.forms import EventoBuscarFechaForm, EventoBuscarLenguaForm
 from main.models import TipoEvento, Lengua, Municipio, Evento
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 
 path = 'data'
 
-
-
+def index(request):
+    return render(request ,'inicio.html',{'STATIC_URL':settings.STATIC_URL})
 
 def populateDatabase(request):
     e = populateTipoEventos()
@@ -137,4 +138,25 @@ def eventos_fecha(request):
             eventos = Evento.objects.filter(fecha__month=formulario.cleaned_data['month'])
 
     return render(request, 'eventosfechaform.html',
+                  {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})
+
+
+def municipio(request):
+    municipios = Municipio.objects.annote(num_mun=Count('evento')).order_by('-num_mun')[:2]
+
+    return render(request, 'municipios.html',
+                  {'municipios': municipios, 'STATIC_URL': settings.STATIC_URL})
+
+
+def eventos_lengua(request):
+    formulario = EventoBuscarLenguaForm()
+    eventos = None
+
+    if request.method == 'POST':
+        formulario = EventoBuscarLenguaForm(request.POST)
+
+        if formulario.is_valid():
+            eventos = Evento.objects.filter(lenguaje=formulario.cleaned_data["id_lengua"]).select_related()
+
+    return render(request, 'eventoslenguaform.html',
                   {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})

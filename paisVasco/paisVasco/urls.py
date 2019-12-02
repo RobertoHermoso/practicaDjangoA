@@ -19,7 +19,6 @@ from main import views
 
 urlpatterns = [
     path('populate/', views.populateDatabase),
-    path('admin/', admin.site.urls),
     path('lista_eventos/', views.lista_eventos),
     path('municipios/', views.municipios),
     path('eventos_fecha/', views.eventos_fecha),
