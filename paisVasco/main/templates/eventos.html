@@ -14,12 +14,12 @@
  <h1>Eventos por tipo</h1>
 	<ul>
 		{% for tipo in tipoeventos %}
-			<li>{{tipo}}<li>
+			<li>{{tipo.nombre}}<li>
 			{% for evento in eventos %}
-				{% if evento.tipo == tipo %}
+				{% if evento.tipoEvento == tipo %}
 	  				<ul>
 						<li>
-							- {{evento.nombre}}, {{evento.fecha}} {{evento.lugar}}<br>
+							- {{evento.nombre}}, {{evento.fecha}} {{evento.nombreLugar}}<br>
 						</li>
 	    			</ul>
 				{% endif %}
