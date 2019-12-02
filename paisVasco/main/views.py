@@ -4,6 +4,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from datetime import datetime
 
+from main.forms import  EventoBuscarFechaForm, EventoBuscarLenguaForm
 from main.models import Provincia, TipoEvento, Lengua, Municipio, Evento
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -114,3 +115,21 @@ def populateMunicipio():
     print("Municipio inserted: " + str(Municipio.objects.count()))
     print("---------------------------------------------------------")
     return dict
+
+def lista_eventos(request):
+    eventos= Evento.objects.all()
+    return render(request, 'lista_eventos.html',{'eventos':eventos, 'STATIC_URL':settings.STATIC_URL})
+
+
+def eventos_fecha(request):
+    formulario = EventoBuscarFechaForm()
+    eventos = None
+
+    if request.method == 'POST':
+        formulario = EventoBuscarFechaForm(request.POST)
+
+        if formulario.is_valid():
+            eventos = Evento.objects.filter(fecha__month=formulario.cleaned_data['month'])
+
+    return render(request, 'eventosfechaform.html',
+                  {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})
