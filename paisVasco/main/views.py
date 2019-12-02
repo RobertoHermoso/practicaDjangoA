@@ -118,7 +118,8 @@ def populateMunicipio():
 
 def lista_eventos(request):
     eventos= Evento.objects.all()
-    return render(request, 'lista_eventos.html',{'eventos':eventos, 'STATIC_URL':settings.STATIC_URL})
+    tipoeventos = TipoEvento.objects.all()
+    return render(request, 'lista_eventos.html',{'eventos':eventos, 'tipoeventos':tipoeventos, 'STATIC_URL':settings.STATIC_URL})
 
 
 def eventos_fecha(request):
