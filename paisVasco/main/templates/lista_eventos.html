@@ -1,0 +1,27 @@
+{% extends 'master.html' %}
+
+{% block titulo %} Lista de eventos {% endblock %}
+
+
+{% block lista_eventos %}
+	<li class="uk-active"><span>Lista de eventos</span></li>
+{% endblock %}
+
+
+{% block contenido %}
+ <h1>Eventos por tipo</h1>
+	<ul>
+		{% for tipo in tipoeventos %}
+			<li>{{tipo.nombre}}<li>
+			{% for evento in eventos %}
+				{% if evento.tipoEvento == tipo %}
+	  				<ul>
+						<li>
+							- {{evento.nombre}}, {{evento.fecha}} {{evento.nombreLugar}}<br>
+						</li>
+	    			</ul>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</ul>
+{% endblock %}

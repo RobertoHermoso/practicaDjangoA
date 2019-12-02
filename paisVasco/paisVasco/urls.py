@@ -18,4 +18,9 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('lista_eventos/', views.lista_eventos),
+    path('municipios/', views.municipios),
+    path('eventos_fecha/', views.eventos_fecha),
+    path('eventos_lengua/', views.eventos_lengua),
+    path('', views.index),
 ]

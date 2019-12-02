@@ -1,0 +1,38 @@
+{% extends 'master.html' %}
+
+{% block titulo %} Buscar eventos por fecha{% endblock %}
+
+{% block eventos_fecha %}
+	<li class="uk-active"><span>Buscar eventos por fecha</span></li>
+{% endblock %}
+		    
+
+{% block contenido %} 
+    <div class="uk-animation-slide-bottom">
+    	<form class="uk-form" id="formulario" method="post" action=''>{% csrf_token %}
+    		<fieldset>
+    			<legend>Busqueda de eventos por fecha</legend>
+				<input type="text" name="mes" id="id_mes" placeholder="Mes de celebración"/>
+    			<BR><BR>
+
+    			<input class="uk-button" type='submit' value='Buscar'/>
+    		</fieldset>
+    	</form>
+
+	    <hr>
+
+	    {% if eventos %}
+		    <h3> Eventos del mes:  {{ eventos|length }}</h3>
+		    <dl class="uk-description-list-line">
+
+			{% for row in eventos %}
+			    <dt>{{row.nombre}}</dt>
+			    <dd>{{row.fecha}} </dd>
+				<dd>{{row.nombreLugar}} </dd>
+			{% endfor %}
+
+			</dl>
+
+		{% endif %}
+	</div>
+{% endblock %}
