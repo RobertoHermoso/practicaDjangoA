@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang='es'>
-<style>
-	img { width:100px;}
-</style>
-  <header>
-  	<nav>
-  		<ul>
-			<li><a href='/'>Inicio</a></li>
-			<li><a href='/eventos'>Eventos</a></li>
-            <li><a href='/municipios'>Municipios con más eventos</a></li>
-			<li><a href='/eventos_fecha'>Buscar eventos por fecha</a></li>
-			<li><a href='/eventos_idioma'>Buscar eventos por idioma</a></li>
-		</ul>
-	</nav>
-  </header>
-  <section>
-    <h1>Eventos por tipo</h1>
+{% extends 'master.html' %}
+
+{% block titulo %} Lista de eventos {% endblock %}
+
+
+{% block eventos %} uk-active {% endblock %}
+
+{% block paginaActiva %}
+	<li class="uk-active"><span>Lista de eventos</span></li>
+{% endblock %}
+
+
+{% block contenido %}
+ <h1>Eventos por tipo</h1>
 	<ul>
 		{% for tipo in tipoeventos %}
 			<li>{{tipo}}<li>
@@ -30,5 +26,4 @@
 			{% endfor %}
 		{% endfor %}
 	</ul>
-  </section>
-</html>
+{% endblock %}

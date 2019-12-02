@@ -8,8 +8,11 @@
 {% block paginaActiva %}
 	<li class="uk-active"><span>Inicio</span></li>
 {% endblock %}
-		    
 
-{% block contenido %} 
 
+{% block contenido %}
+    <h1>Nombres de los dos municipios donde más eventos se celebran</h1>
+		{% for municipio in municipios %}
+			<h3>municipio.nombre</h3>
+		{% endfor %}
 {% endblock %}
