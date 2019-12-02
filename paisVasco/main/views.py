@@ -4,7 +4,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from datetime import datetime
 
-from main.models import Provincia, TipoEvento, Lengua, Municipio, Evento
+from main.models import TipoEvento, Lengua, Municipio, Evento
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -13,13 +13,15 @@ from django.contrib.auth.decorators import login_required
 path = 'data'
 
 
+
+
 def populateDatabase(request):
     e = populateTipoEventos()
     l = populateLenguas()
     m = populateMunicipio()
     populateEventos(e,l,m)
     logout(request)  # se hace logout para obligar a login cada vez que se vaya a poblar la BD
-    return HttpResponseRedirect('/index.html')
+    return HttpResponseRedirect('/master.html')
 
 
 def populateEventos(evento_map, lenguas_map, municipio_map):
@@ -51,6 +53,7 @@ def populateEventos(evento_map, lenguas_map, municipio_map):
 
     print("Eventos inserted: " + str(Evento.objects.count()))
     print("---------------------------------------------------------")
+
 
 
 def populateTipoEventos():

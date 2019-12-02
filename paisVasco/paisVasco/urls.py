@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from main import views
 
 urlpatterns = [
+    path('populate/', views.populateDatabase),
     path('admin/', admin.site.urls),
     path('lista_eventos/', views.lista_eventos),
     path('municipios/', views.municipios),
